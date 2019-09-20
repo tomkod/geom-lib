@@ -131,7 +131,7 @@ static void visitEdgesTest()
     uint32_t visitedCount;
 
     const uint32_t triangleIndexCount = static_cast<uint32_t>(triangleIndices.size());
-    StackArray<bool> visitedEdge(pool, triangleIndexCount);
+    std::vector<bool> visitedEdge(triangleIndexCount);
 
     visitedCount = 0;
     for(uint32_t i = 0; i < triangleIndexCount; ++i)

@@ -101,7 +101,7 @@ bool Manifold::build(BuildWorkspace& wks)
             adjList.push_back(vr);
 
         // Match all combinations.
-        const uint32_t adjCount = adjList.count();
+        const uint32_t adjCount = static_cast<uint32_t>(adjList.size());
         for (uint32_t k1 = 0; k1 < adjCount; ++k1) {
             const auto vr1 = adjList[k1];
             auto& t1 = m_triangles[vr1.index];

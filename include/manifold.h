@@ -17,7 +17,6 @@
 #pragma once
 
 #include <glslMath.h>
-#include <stackPool.h>
 
 #include <vector>
 
@@ -54,7 +53,7 @@ public:
     {
     	std::vector<Link> vertexRings;
     	std::vector<TriangleVertexRings> triangleVertexRings;
-    	std::vector<Link> ajdList;
+        std::vector<Link> adjList;
     };
 
     std::vector<Triangle> m_triangles;
