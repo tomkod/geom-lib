@@ -86,6 +86,160 @@ template <typename T> class tmat2;
 template <typename T> class tmat3;
 template <typename T> class tmat4;
 
+#define VEC2_GET(A, B) \
+    tvec2<T> A ## B() const { return tvec2<T>(A, B); }
+#define VEC2_GET2(A, B) \
+    VEC2_GET(A, B) \
+    VEC2_GET(B, A)
+#define VEC2_GET22(A, B) \
+    VEC2_GET2(A, B) \
+    VEC2_GET(A, A) \
+    VEC2_GET(B, B)
+#define VEC2_GET3(A, B, C) \
+    VEC2_GET22(A, B) \
+    VEC2_GET2(A, C) \
+    VEC2_GET2(B, C) \
+    VEC2_GET(C, C)
+#define VEC2_GET4(A, B, C, D) \
+    VEC2_GET3(A, B, C) \
+    VEC2_GET2(A, D) \
+    VEC2_GET2(B, D) \
+    VEC2_GET2(C, D) \
+    VEC2_GET(D, D)
+
+#define VEC3_GET(A, B, C) \
+    tvec3<T> A ## B ## C() const { return tvec3<T>(A, B, C); }
+#define VEC3_GET2(A, B, C) \
+    VEC3_GET(A, B, C) \
+    VEC3_GET(A, C, B)
+#define VEC3_GET3(A, B, C) \
+    VEC3_GET2(A, B, C) \
+    VEC3_GET2(B, A, C) \
+    VEC3_GET2(C, A, B)
+#define VEC3_GET22(A, B) \
+    VEC3_GET(A, A, B) \
+    VEC3_GET(A, B, A) \
+    VEC3_GET(B, A, A)
+#define VEC3_GET222(A, B) \
+    VEC3_GET22(A, B) \
+    VEC3_GET22(B, A)
+#define VEC3_GET33(A, B, C) \
+    VEC3_GET3(A, B, C) \
+    VEC3_GET222(A, B) \
+    VEC3_GET222(A, C) \
+    VEC3_GET222(B, C) \
+    VEC3_GET(A, A, A) \
+    VEC3_GET(B, B, B) \
+    VEC3_GET(C, C, C)
+#define VEC3_GET44(A, B, C, D) \
+    VEC3_GET33(A, B, C) \
+    VEC3_GET3(A, B, D) \
+    VEC3_GET3(A, C, D) \
+    VEC3_GET3(B, C, D) \
+    VEC3_GET222(A, D) \
+    VEC3_GET222(B, D) \
+    VEC3_GET222(C, D) \
+    VEC3_GET(D, D, D)
+
+#define VEC4_GET(A, B, C, D) \
+    tvec4<T> A ## B ## C ## D() const { return tvec4<T>(A, B, C, D); }
+#define VEC4_GET2(A, B, C, D) \
+    VEC4_GET(A, B, C, D) \
+    VEC4_GET(A, B, D, C)
+#define VEC4_GET3(A, B, C, D) \
+    VEC4_GET2(A, B, C, D) \
+    VEC4_GET2(A, C, B, D) \
+    VEC4_GET2(A, D, B, C)
+#define VEC4_GET4(A, B, C, D) \
+    VEC4_GET3(A, B, C, D) \
+    VEC4_GET3(B, A, C, D) \
+    VEC4_GET3(C, A, B, D) \
+    VEC4_GET3(D, A, B, C)
+#define VEC4_GET22(A, B, C) \
+    VEC4_GET(A, A, B, C) \
+    VEC4_GET(A, B, A, C) \
+    VEC4_GET(A, B, C, A) \
+    VEC4_GET(B, A, A, C) \
+    VEC4_GET(B, A, C, A) \
+    VEC4_GET(B, C, A, A)
+#define VEC4_GET222(A, B, C) \
+    VEC4_GET22(A, B, C) \
+    VEC4_GET22(A, C, B)
+#define VEC4_GET2222(A, B, C, D) \
+    VEC4_GET222(A, B, C) \
+    VEC4_GET222(A, B, D) \
+    VEC4_GET222(A, C, D)
+#define VEC4_GET22222(A, B, C, D) \
+    VEC4_GET2222(A, B, C, D) \
+    VEC4_GET2222(B, A, C, D) \
+    VEC4_GET2222(C, A, B, D) \
+    VEC4_GET2222(D, A, B, C)
+#define VEC4_GET33(A, B) \
+    VEC4_GET(A, A, A, B) \
+    VEC4_GET(A, A, B, A) \
+    VEC4_GET(A, B, A, A) \
+    VEC4_GET(B, A, A, A)
+#define VEC4_GET333(A, B, C, D) \
+    VEC4_GET33(A, B) \
+    VEC4_GET33(A, C) \
+    VEC4_GET33(A, D) \
+    VEC4_GET33(B, C) \
+    VEC4_GET33(B, D) \
+    VEC4_GET33(C, D)
+#define VEC4_GET44(A, B, C, D) \
+    VEC4_GET4(A, B, C, D) \
+    VEC4_GET22222(A, B, C, D) \
+    VEC4_GET333(A, B, C, D) \
+    VEC4_GET(A, A, A, A) \
+    VEC4_GET(B, B, B, B) \
+    VEC4_GET(C, C, C, C) \
+    VEC4_GET(D, D, D, D)
+
+#define VEC2_SET(A, B) \
+    void set_ ## A ## B(const tvec2<T>& a) { A = a.x; B = a.y; }
+#define VEC2_SET2(A, B) \
+    VEC2_SET(A, B) \
+    VEC2_SET(B, A)
+#define VEC2_SET3(A, B, C) \
+    VEC2_SET2(A, B) \
+    VEC2_SET2(A, C) \
+    VEC2_SET2(B, C)
+#define VEC2_SET4(A, B, C, D) \
+    VEC2_SET3(A, B, C) \
+    VEC2_SET2(A, D) \
+    VEC2_SET2(B, D) \
+    VEC2_SET2(C, D)
+
+#define VEC3_SET(A, B, C) \
+    void set_ ## A ## B ## C(const tvec3<T>& a) { A = a.x; B = a.y; C = a.z; }
+#define VEC3_SET2(A, B, C) \
+    VEC3_SET(A, B, C) \
+    VEC3_SET(A, C, B)
+#define VEC3_SET3(A, B, C) \
+    VEC3_SET2(A, B, C) \
+    VEC3_SET2(B, A, C) \
+    VEC3_SET2(C, A, B)
+#define VEC3_SET4(A, B, C, D) \
+    VEC3_SET3(A, B, C) \
+    VEC3_SET3(A, B, D) \
+    VEC3_SET3(A, C, D) \
+    VEC3_SET3(B, C, D)
+
+#define VEC4_SET(A, B, C, D) \
+    void set_ ## A ## B ## C ## D(const tvec4<T>& a) { A = a.x; B = a.y; C = a.z; D = a.w; }
+#define VEC4_SET2(A, B, C, D) \
+    VEC4_SET(A, B, C, D) \
+    VEC4_SET(A, B, D, C)
+#define VEC4_SET3(A, B, C, D) \
+    VEC4_SET2(A, B, C, D) \
+    VEC4_SET2(A, C, B, D) \
+    VEC4_SET2(A, D, B, C)
+#define VEC4_SET4(A, B, C, D) \
+    VEC4_SET3(A, B, C, D) \
+    VEC4_SET3(B, A, C, D) \
+    VEC4_SET3(C, A, B, D) \
+    VEC4_SET3(D, A, B, C)
+
 template <typename T>
 class tvec2 {
 public:
@@ -105,6 +259,9 @@ public:
     tvec2& operator-=(T a) { x -= a; y -= a; return *this; }
     tvec2& operator*=(T a) { x *= a; y *= a; return *this; }
     tvec2& operator/=(T a) { x /= a; y /= a; return *this; }
+
+    VEC2_GET22(x, y)
+    VEC2_SET2(x, y)
 
     template <typename TT>
     tvec2(const tvec2<TT>& v) : x(static_cast<T>(v.x)), y(static_cast<T>(v.y)) { }
@@ -155,6 +312,12 @@ public:
     tvec3<T>& operator-=(T a) { x -= a; y -= a; z -= a; return *this; }
     tvec3<T>& operator*=(T a) { x *= a; y *= a; z *= a; return *this; }
     tvec3<T>& operator/=(T a) { x /= a; y /= a; z /= a; return *this; }
+
+    VEC2_GET3(x, y, z)
+    VEC2_SET3(x, y, z)
+
+    VEC3_GET33(x, y, z)
+    VEC3_SET3(x, y, z)
 
     template <typename TT>
     tvec3(const tvec3<TT>& v) : x(static_cast<T>(v.x)), y(static_cast<T>(v.y)), z(static_cast<T>(v.z)) { }
@@ -210,6 +373,15 @@ public:
     tvec4<T>& operator*=(T a) { x *= a; y *= a; z *= a; w *= a; return *this; }
     tvec4<T>& operator/=(T a) { x /= a; y /= a; z /= a; w /= a; return *this; }
 
+    VEC2_GET4(x, y, z, w)
+    VEC2_SET4(x, y, z, w)
+
+    VEC3_GET44(x, y, z, w)
+    VEC3_SET4(x, y, z, w)
+
+    VEC4_GET44(x, y, z, w)
+    VEC4_SET4(x, y, z, w)
+
     template <typename TT>
     tvec4(const tvec4<TT>& v) : x(static_cast<T>(v.x)), y(static_cast<T>(v.y)), z(static_cast<T>(v.z)), w(static_cast<T>(v.w)) { }
 };
@@ -237,6 +409,46 @@ template <typename T>
 bool operator==(const tvec4<T>& a, const tvec4<T>& b) { return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w; }
 template <typename T>
 bool operator!=(const tvec4<T>& a, const tvec4<T>& b) { return a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w; }
+
+#undef VEC2_GET
+#undef VEC2_GET2
+#undef VEC2_GET22
+#undef VEC2_GET3
+#undef VEC2_GET4
+
+#undef VEC3_GET
+#undef VEC3_GET2
+#undef VEC3_GET3
+#undef VEC3_GET22
+#undef VEC3_GET222
+#undef VEC3_GET33
+#undef VEC3_GET44
+
+#undef VEC4_GET2
+#undef VEC4_GET3
+#undef VEC4_GET4
+#undef VEC4_GET22
+#undef VEC4_GET222
+#undef VEC4_GET2222
+#undef VEC4_GET22222
+#undef VEC4_GET33
+#undef VEC4_GET333
+#undef VEC4_GET44
+
+#undef VEC2_SET
+#undef VEC2_SET2
+#undef VEC2_SET3
+#undef VEC2_SET4
+
+#undef VEC3_SET
+#undef VEC3_SET2
+#undef VEC3_SET3
+#undef VEC3_SET4
+
+#undef VEC4_SET
+#undef VEC4_SET2
+#undef VEC4_SET3
+#undef VEC4_SET4
 
 template <typename T>
 class tmat2 {
@@ -323,18 +535,41 @@ static_assert(sizeof(tmat3<double>) == 9 * 8, "invalid tmat3<T> alignment");
 static_assert(sizeof(tmat4<double>) == 16 * 8, "invalid tmat4<T> alignment");
 
 template <typename T>
-tvec2<T> floor(const tvec2<T>& v) { return tvec2<T>(std::floor(v.x), std::floor(v.y)); }
+tvec2<T> abs(const tvec2<T>& a) { return tvec2<T>(abs(a.x), abs(a.y)); }
 template <typename T>
-tvec3<T> floor(const tvec3<T>& v) { return tvec3<T>(std::floor(v.x), std::floor(v.y), std::floor(v.z)); }
+tvec3<T> abs(const tvec3<T>& a) { return tvec3<T>(abs(a.x), abs(a.y), abs(a.z)); }
 template <typename T>
-tvec4<T> floor(const tvec4<T>& v) { return tvec4<T>(std::floor(v.x), std::floor(v.y), std::floor(v.z), std::floor(v.w)); }
+tvec4<T> abs(const tvec4<T>& a) { return tvec4<T>(abs(a.x), abs(a.y), abs(a.z), abs(a.w)); }
 
-inline float fract(float x) { return x - std::floor(x); }
-inline double fract(double x) { return x - std::floor(x); }
 template <typename T>
-tvec2<T> fract(const tvec2<T>& x) { return x - std::floor(x); }
+tvec2<T> max(const tvec2<T>& a, const tvec2<T>& b ) { return tvec2<T>(max(a.x,b.x), max(a.y,b.y)); }
 template <typename T>
-tvec3<T> fract(const tvec3<T>& x) { return x - std::floor(x); }
+tvec3<T> max(const tvec3<T>& a, const tvec3<T>& b ) { return tvec3<T>(max(a.x,b.x), max(a.y,b.y), max(a.z,b.z)); }
+template <typename T>
+tvec4<T> max(const tvec4<T>& a, const tvec4<T>& b ) { return tvec4<T>(max(a.x,b.x), max(a.y,b.y), max(a.z,b.z), max(a.w,b.w)); }
+
+template <typename T>
+tvec2<T> min(const tvec2<T>& a, const tvec2<T>& b ) { return tvec2<T>(min(a.x,b.x), min(a.y,b.y)); }
+template <typename T>
+tvec3<T> min(const tvec3<T>& a, const tvec3<T>& b ) { return tvec3<T>(min(a.x,b.x), min(a.y,b.y), min(a.z,b.z)); }
+template <typename T>
+tvec4<T> min(const tvec4<T>& a, const tvec4<T>& b ) { return tvec4<T>(min(a.x,b.x), min(a.y,b.y), min(a.z,b.z), min(a.w,b.w)); }
+
+inline float floor(float x) { return std::floor(x); }
+inline double floor(double x) { return std::floor(x); }
+template <typename T>
+tvec2<T> floor(const tvec2<T>& v) { return tvec2<T>(floor(v.x), floor(v.y)); }
+template <typename T>
+tvec3<T> floor(const tvec3<T>& v) { return tvec3<T>(floor(v.x), floor(v.y), floor(v.z)); }
+template <typename T>
+tvec4<T> floor(const tvec4<T>& v) { return tvec4<T>(floor(v.x), floor(v.y), floor(v.z), floor(v.w)); }
+
+inline float fract(float x) { return x - floor(x); }
+inline double fract(double x) { return x - floor(x); }
+template <typename T>
+tvec2<T> fract(const tvec2<T>& x) { return x - floor(x); }
+template <typename T>
+tvec3<T> fract(const tvec3<T>& x) { return x - floor(x); }
 template <typename T>
 tvec4<T> fract(const tvec4<T>& x) { return x - floor(x); }
 
